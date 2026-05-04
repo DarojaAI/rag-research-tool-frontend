@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FortEvent - Approval Queue</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <nav class="bg-white shadow-sm border-b p-4">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <h1 class="text-xl font-bold text-blue-700">FortEvent</h1>
+            <div class="flex gap-2">
+                <span class="px-3 py-1 bg-blue-100 text-blue-700 rounded text-sm">Approvals</span>
+                <span class="px-3 py-1 text-gray-500 rounded text-sm hover:bg-gray-100 cursor-pointer">Audit Trail</span>
+                <span class="px-3 py-1 text-gray-500 rounded text-sm hover:bg-gray-100 cursor-pointer">Dashboard</span>
+                <span class="px-3 py-1 text-gray-500 rounded text-sm hover:bg-gray-100 cursor-pointer">Status</span>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto p-6">
+        <h2 class="text-2xl font-bold mb-6">Approval Queue</h2>
+
+        <!-- Filters -->
+        <div class="flex gap-4 mb-6">
+            <select class="px-3 py-2 border rounded text-sm bg-white">
+                <option>All Stages</option>
+                <option>Functional (1)</option>
+                <option>Compliance (2)</option>
+                <option>Sponsor (3)</option>
+                <option>Operational (4)</option>
+                <option>Coordination (5)</option>
+                <option>Executive (6)</option>
+            </select>
+            <input type="text" placeholder="Filter by reviewer..." class="px-3 py-2 border rounded text-sm flex-1 max-w-xs">
+            <span class="text-sm text-gray-500 self-center">12 pending</span>
+        </div>
+
+        <!-- Stage Columns -->
+        <div class="grid grid-cols-3 gap-4">
+            <!-- Functional Stage -->
+            <div class="bg-white border rounded-lg p-4">
+                <h3 class="font-medium text-sm mb-3 flex justify-between">
+                    Functional
+                    <span class="text-gray-400 bg-gray-100 px-2 py-0.5 rounded-full text-xs">4</span>
+                </h3>
+                <div class="space-y-2">
+                    <div class="p-3 border rounded bg-gray-50 hover:shadow cursor-pointer">
+                        <div class="text-sm font-medium">Transport_ConOps_v2.docx</div>
+                        <div class="flex justify-between items-center mt-1">
+                            <span class="text-xs text-gray-500">jane@ipsem.gov</span>
+                            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800 border border-yellow-300">MEDIUM 2</span>
+                        </div>
+                        <div class="mt-2 flex gap-2">
+                            <button class="px-3 py-1 bg-green-600 text-white rounded text-xs hover:bg-green-700">Approve</button>
+                            <button class="px-3 py-1 bg-red-600 text-white rounded text-xs hover:bg-red-700">Reject</button>
+                        </div>
+                    </div>
+                    <div class="p-3 border rounded bg-gray-50 hover:shadow cursor-pointer">
+                        <div class="text-sm font-medium">Catering_Policy_v1.docx</div>
+                        <div class="flex justify-between items-center mt-1">
+                            <span class="text-xs text-gray-500">bob@ipsem.gov</span>
+                            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800 border border-red-300">HIGH 1</span>
+                        </div>
+                        <div class="mt-2 flex gap-2">
+                            <button class="px-3 py-1 bg-green-600 text-white rounded text-xs hover:bg-green-700">Approve</button>
+                            <button class="px-3 py-1 bg-red-600 text-white rounded text-xs hover:bg-red-700">Reject</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Compliance Stage -->
+            <div class="bg-white border rounded-lg p-4">
+                <h3 class="font-medium text-sm mb-3 flex justify-between">
+                    Compliance
+                    <span class="text-gray-400 bg-gray-100 px-2 py-0.5 rounded-full text-xs">3</span>
+                </h3>
+                <div class="space-y-2">
+                    <div class="p-3 border rounded bg-gray-50">
+                        <div class="text-sm font-medium">Venue_Ops_v1.docx</div>
+                        <div class="flex justify-between items-center mt-1">
+                            <span class="text-xs text-gray-500">alice@ipsem.gov</span>
+                            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 border border-green-300">LOW 0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sponsor Stage -->
+            <div class="bg-white border rounded-lg p-4">
+                <h3 class="font-medium text-sm mb-3 flex justify-between">
+                    Sponsor
+                    <span class="text-gray-400 bg-gray-100 px-2 py-0.5 rounded-full text-xs">2</span>
+                </h3>
+                <p class="text-xs text-gray-400">Awaiting compliance completion...</p>
+            </div>
+        </div>
+
+        <!-- WebSocket Status -->
+        <div class="fixed bottom-4 right-4 flex items-center gap-2 bg-white border rounded-full px-4 py-2 shadow-lg">
+            <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+            <span class="text-xs text-gray-600">Real-time updates active</span>
+        </div>
+    </main>
+</body>
+</html>
