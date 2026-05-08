@@ -15,5 +15,9 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     sourcemap: true,
+    // Ensure relative base path for static hosting
+    assetsDir: 'assets',
   },
+  // SPA fallback - serves index.html for all non-file routes
+  appType: 'spa',
 });

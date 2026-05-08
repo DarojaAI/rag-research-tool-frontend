@@ -74,9 +74,27 @@ COPY dist/ /usr/share/nginx/html/
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 ```
 
+### Cloudflare Pages
+
+```bash
+# Build with your backend URL
+VITE_API_BASE_URL=https://your-backend.workers.dev npm run build
+
+# In Cloudflare Pages settings:
+# - Build command: npm run build
+# - Build output directory: dist
+# - Add environment variable: VITE_API_BASE_URL = https://your-backend.workers.dev
+```
+
+For client-side routing (SPA mode), Cloudflare Pages handles this automatically.
+
 ### Environment Variables
 
-The app uses relative paths for API calls, so no environment configuration is typically needed. The Vite proxy handles `/api` routing during development.
+| Variable | Description | Default |
+|----------|-------------|---------|
+| `VITE_API_BASE_URL` | Backend API base URL | `/api/v1` (relative path) |
+
+Set `VITE_API_BASE_URL` for production deployments where the API is hosted separately.
 
 ## Architecture
 
