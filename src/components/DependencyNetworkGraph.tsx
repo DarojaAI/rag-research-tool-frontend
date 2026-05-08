@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from 'react';
-import * as cytoscape from 'cytoscape';
+import cytoscape from 'cytoscape';
+// @ts-ignore - no type definitions available
 import cola from 'cytoscape-cola';
 
 cytoscape.use(cola);
@@ -31,17 +32,17 @@ const DependencyNetworkGraph: React.FC<DependencyNetworkGraphProps> = ({ nodes, 
 
     const elements = [
       ...nodes.map(n => ({ data: { id: n.id, label: n.label, type: n.type } })),
-      ...edges.map(e => ({ data: { source: e.source, target: e.target, label: e.label } }),
+      ...edges.map(e => ({ data: { source: e.source, target: e.target, label: e.label } })),
     ];
 
     cyRef.current = cytoscape({
       container: containerRef.current,
       elements,
       style: [
-        { selector: 'node', style: { label: 'data(label)', width: 80, height: 40, backgroundColor: '#3b82f6', color: '#fff', textFontSize: 12, textValign: 'center', textHalign: 'center' } },
-        { selector: 'edge', style: { label: 'data(label)', width: 2, lineColor: '#94a3b8', color: '#64748b', fontSize: 10, curveStyle: 'bezier' } },
+        { selector: 'node', style: { label: 'data(label)', width: 80, height: 40, backgroundColor: '#3b82f6', color: '#fff', 'font-size': '12px', 'text-valign': 'center', 'text-halign': 'center' } },
+        { selector: 'edge', style: { label: 'data(label)', width: 2, 'line-color': '#94a3b8', color: '#64748b', 'font-size': '10px', 'curve-style': 'bezier' } },
       ],
-      layout: { name: 'cola', animate: true },
+      layout: { name: 'cola' } as any,
     });
 
     cyRef.current.on('tap', 'node', (evt) => {

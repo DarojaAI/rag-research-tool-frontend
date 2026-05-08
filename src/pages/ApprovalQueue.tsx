@@ -17,7 +17,7 @@ const ApprovalQueue: React.FC = () => {
   const [selectedStage, setSelectedStage] = useState<number | undefined>(undefined);
   const [selectedReviewer, setSelectedReviewer] = useState<string>('');
 
-  const { data: approvals = [], isLoading, refetch } = useQuery({
+  const { data: approvals = [], refetch } = useQuery({
     queryKey: ['approvals', selectedStage, selectedReviewer],
     queryFn: () => getApprovals(selectedStage, selectedReviewer || undefined),
   });
@@ -28,7 +28,7 @@ const ApprovalQueue: React.FC = () => {
     return acc;
   }, {});
 
-  const handleApprove = async (id: string, comment: string) => {
+  const handleApprove = async () => {
     await refetch();
   };
 

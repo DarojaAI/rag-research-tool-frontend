@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ApprovalStage, ApprovalDecision } from '../api/approvals';
+import { ApprovalStage } from '../api/approvals';
 
 interface ApprovalFormProps {
   approvalId: string;

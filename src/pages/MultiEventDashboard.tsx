@@ -2,7 +2,6 @@ import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { getEvents, Event } from '../api/events';
 import { getEventStatus } from '../api/events';
-import ConflictBadge from '../components/ConflictBadge';
 
 const MultiEventDashboard: React.FC = () => {
   const { data: events = [], isLoading } = useQuery({

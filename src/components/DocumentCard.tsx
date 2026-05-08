@@ -1,6 +1,5 @@
 import React from 'react';
 import { Document } from '../api/documents';
-import ConflictBadge from './ConflictBadge';
 
 interface DocumentCardProps {
   document: Document;

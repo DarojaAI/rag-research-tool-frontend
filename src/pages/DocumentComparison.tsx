@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { getDocuments, Document } from '../api/documents';
-import { compareDocuments, DocumentComparison } from '../api/documents';
+import { compareDocuments } from '../api/documents';
 import TripletDiffViewer from '../components/TripletDiffViewer';
 
 const DocumentComparison: React.FC = () => {
@@ -22,9 +22,9 @@ const DocumentComparison: React.FC = () => {
   });
 
   // Summary counts
-  const added = comparison?.diffs?.filter((d: any) => d.type === 'added').length || 0;
-  const removed = comparison?.diffs?.filter((d: any) => d.type === 'removed').length || 0;
-  const changed = comparison?.diffs?.filter((d: any) => d.type === 'changed').length || 0;
+  const added = comparison?.diffs?.added?.length || 0;
+  const removed = comparison?.diffs?.removed?.length || 0;
+  const changed = comparison?.diffs?.changed?.length || 0;
 
   return (
     <div>
@@ -98,7 +98,13 @@ const DocumentComparison: React.FC = () => {
 
       {/* Side-by-Side Diff */}
       {isLoading && <p className="text-gray-500">Loading comparison...</p>}
-      {comparison && <TripletDiffViewer diffs={comparison.diffs || []} />}
+      {comparison && comparison.diffs && (
+        <TripletDiffViewer diffs={[
+          ...comparison.diffs.added.map(d => ({ ...d, type: 'added' as const })),
+          ...comparison.diffs.removed.map(d => ({ ...d, type: 'removed' as const })),
+          ...comparison.diffs.changed.map(d => ({ ...d, type: 'changed' as const })),
+        ]} />
+      )}
 
       {/* Impact Assessment */}
       {comparison && (added > 0 || changed > 0) && (
