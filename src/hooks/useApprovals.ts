@@ -1,8 +1,12 @@
-import { useEffect } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { getApprovals } from '../api/approvals';
 import { useApprovalStore } from '../store/approvalSlice';
 
 export const useApprovals = () => {
-  const { approvals, loading, error, fetchApprovals } = useApprovalStore();
-  useEffect(() => { fetchApprovals(); }, [fetchApprovals]);
-  return { approvals, loading, error, refetch: fetchApprovals };
+  const { filterStage, filterReviewer } = useApprovalStore();
+
+  return useQuery({
+    queryKey: ['approvals', filterStage, filterReviewer],
+    queryFn: () => getApprovals(filterStage, filterReviewer || undefined),
+  });
 };

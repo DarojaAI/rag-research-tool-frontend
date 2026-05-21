@@ -1,8 +1,12 @@
-import { useEffect } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { getDocuments } from '../api/documents';
 import { useDocumentStore } from '../store/documentSlice';
 
 export const useDocuments = () => {
-  const { documents, loading, fetchDocuments } = useDocumentStore();
-  useEffect(() => { fetchDocuments(); }, [fetchDocuments]);
-  return { documents, loading, refetch: fetchDocuments };
+  const { filterEventType } = useDocumentStore();
+
+  return useQuery({
+    queryKey: ['documents', filterEventType],
+    queryFn: () => getDocuments(filterEventType || undefined),
+  });
 };
