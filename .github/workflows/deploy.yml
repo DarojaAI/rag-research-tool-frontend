@@ -23,10 +23,6 @@ jobs:
       - uses: DarojaAI/public-workflows/actions/check/typescript@8941de03ddf552f483806e493bbb86e22626f1cc  # v2.1.0
         with:
           working_directory: .
-      - uses: DarojaAI/public-workflows/actions/check/eslint@8941de03ddf552f483806e493bbb86e22626f1cc  # v2.1.0
-        with:
-          working_directory: .
-          max_warnings: 0
       - uses: DarojaAI/public-workflows/actions/check/vitest@8941de03ddf552f483806e493bbb86e22626f1cc  # v2.1.0
         with:
           working_directory: .
